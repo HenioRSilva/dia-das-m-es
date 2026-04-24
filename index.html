@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feliz Dia das Mães</title>
+
+  <style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f6c4e3;
+    overflow: hidden;
+  }
+
+  /* TELA INICIAL */
+  .intro {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  }
+
+  .image-area {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  }
+
+  /* WRAPPER PARA EFEITO */
+  .image-wrapper {
+  position: relative;
+  width: 90%;
+  height: 90%;
+  overflow: hidden;
+  border-radius: 16px;
+  }
+
+  /* FUNDO BLUR */
+  .bg-blur {
+    position: absolute;
+    inset: 0;
+    background: url('gestante.jpg') center/cover no-repeat;
+    filter: blur(50px) brightness(0.98);
+    transform: scale(1.2);
+  }
+
+  /* IMAGEM PRINCIPAL */
+  .main-img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 16px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+  }
+
+  .text-area {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* restante */
+  .container {
+    max-width: 600px;
+    margin: auto;
+    text-align: center;
+  }
+
+  button {
+    padding: 12px 24px;
+    font-size: 16px;
+    background: #ff6b81;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 5px 20px rgb(88, 88, 88);
+  }
+
+  .hidden { display: none; }
+
+  /* slide */
+  #slide {
+    width: 100%;
+    max-height: 70vh;
+    height: auto;
+    object-fit: contain;
+    border-radius: 10px;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+  }
+
+  #slide.show { opacity: 1; }
+
+  .caption {
+    margin-top: 10px;
+    font-size: 18px;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+  }
+
+  .caption.show { opacity: 1; }
+
+  /* folhas */
+.leaf {
+  position: fixed;
+  top: -50px;
+  width: 22px;
+  height: 22px;
+  background: #b8e6b8; /* verde bebê */
+  border-radius: 0 100% 0 100%;
+  transform: rotate(45deg);
+  animation: fall linear infinite;
+  z-index: 1;
+  opacity: 0.5;
+  box-shadow: inset -2px -2px 4px rgba(255,255,255,0.4);
+}
+
+.leaf::before {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 18px;
+  background: rgba(255,255,255,0.5);
+  left: 10px;
+  top: 2px;
+  transform: rotate(-45deg);
+  border-radius: 2px;
+}
+
+  @keyframes fall {
+    to {
+      transform: translateY(110vh) rotate(360deg);
+    }
+  }
+
+  /* responsivo */
+  @media (max-width: 768px) {
+    .intro {
+      flex-direction: column;
+    }
+
+    .image-area,
+    .text-area {
+      width: 100%;
+      height: 50%;
+    }
+  }
+  </style>
+</head>
+
+<body>
+
+<!-- TELA INICIAL -->
+<div class="intro" id="step1">
+
+  <div class="image-area">
+    <div class="image-wrapper">
+      <div class="bg-blur"></div>
+      <img src="gestante.jpg" class="main-img" alt="Mamãe Gestante">
+    </div>
+  </div>
+
+  <div class="text-area">
+    <h1>Feliz Dia das Mães 💖</h1>
+    <button onclick="startExperience()">Começar</button>
+  </div>
+
+</div>
+
+<!-- SLIDES -->
+<div class="container hidden" id="step2">
+  <h2>Nosso Primeiro Dia das Mães 💕</h2>
+  <img id="slide" src="foto1.jpg">
+  <div class="caption" id="caption"></div>
+  <audio id="music" src="tempo_vai_devagar.mp3"></audio>
+</div>
+
+<!-- FINAL -->
+<div class="container hidden" id="step3">
+  <h2>Mensagem Final ✨</h2>
+
+  <p>
+    Mãe,
+  </p>
+
+  <p>
+    Hoje, quero agradecer por cada abraço que acalma e por cada gesto de amor que, muitas vezes em silêncio, faz toda a diferença na minha vida.
+  </p>
+
+  <p>
+    Seu cuidado, sua força e sua dedicação são presentes que carrego todos os dias. Você é abrigo nos momentos difíceis, sorriso nos dias bons e coragem quando eu mais preciso.
+  </p>
+
+  <p>
+    Obrigado por amar sem medida, por acreditar em mim e por ser essa presença tão essencial. Seu amor é uma das maiores bênçãos da minha vida. 
+  </p>
+
+  <p style="font-size: 28px; font-weight: bold;">
+    Feliz Dia das Mães 💖
+  </p>
+
+  <p>
+    Te amar e te agradecer será sempre pouco diante de tudo o que você representa.
+  </p>
+
+  <p style="margin-top: 30px; font-size: 20px; font-style: italic; font-weight: bold; color: #b85c8a;">
+    “Seus filhos se levantam e a elogiam; seu marido também a louva, dizendo:
+    Muitas mulheres são exemplares, mas você a todas supera. Provérbios 31:28-29”
+  </p>
+
+<script>
+const slides = [
+  { img: "foto1.jpg", text: "Mãe, ainda tenho só 10 meses de vida, mas você já me ensinou o que é amor." },
+  { img: "foto2.jpg", text: "E é no seu colo que encontro paz e muita segurança." },
+  { img: "foto3.jpg", text: "No seu sorriso, descubro a alegria mais bonita do mundo." },
+  { img: "foto4.jpg", text: "No seu abraço, Mãe, sinto o lugar mais seguro que existe." },
+  { img: "foto5.jpg", text: "e mesmo sem saber falar, meu olhar tenta te dizer tudo." },
+  { img: "foto6.jpg", text: "Você é meu aconchego, minha proteção e meu primeiro amor." },
+  { img: "foto7.jpg", text: "Cada pequeno gesto meu carrega um amor imenso por você." },
+  { img: "foto8.jpg", text: "Seu carinho é o que faz meu mundo ser tão especial." },
+  { img: "foto9.jpg", text: "E... se eu pudesse Mãe, te daria o maior presente do universo." },
+  { img: "foto10.jpg", text: "Mas hoje, é nosso primeiro dia das Mães juntos e te entrego meu amor e um feliz Dia das Mães." }
+];
+
+let index = 0;
+
+function fadeInAudio(audio, targetVolume, duration) {
+  audio.volume = 0;
+  audio.play();
+
+  let step = targetVolume / (duration / 100);
+
+  let interval = setInterval(() => {
+    if (audio.volume < targetVolume) {
+      audio.volume = Math.min(audio.volume + step, targetVolume);
+    } else {
+      clearInterval(interval);
+    }
+  }, 100);
+}
+
+function fadeOutAudio(audio, duration) {
+  let step = audio.volume / (duration / 100);
+
+  let interval = setInterval(() => {
+    if (audio.volume > 0) {
+      audio.volume = Math.max(audio.volume - step, 0);
+    } else {
+      audio.pause();
+      clearInterval(interval);
+      endSlides();
+    }
+  }, 100);
+}
+
+function startExperience() {
+  document.getElementById('step1').classList.add('hidden');
+  document.getElementById('step2').classList.remove('hidden');
+
+  const music = document.getElementById('music');
+
+  setTimeout(() => {
+    fadeInAudio(music, 0.25, 4000);
+  }, 800);
+
+  createLeaves();
+  showSlide();
+}
+
+function showSlide() {
+  const slide = document.getElementById('slide');
+  const caption = document.getElementById('caption');
+
+  if (index < slides.length) {
+
+    slide.classList.remove('show');
+    caption.classList.remove('show');
+
+    setTimeout(() => {
+      slide.src = slides[index].img;
+      caption.innerText = slides[index].text;
+
+      if (index === 0) {
+        const laugh = new Audio('risada.mp3');
+        laugh.volume = 0.1;
+        laugh.play();
+        setTimeout(() => laugh.pause(), 2500);
+      }
+
+      slide.classList.add('show');
+      caption.classList.add('show');
+
+      index++;
+    }, 400);
+
+    setTimeout(showSlide, 7000);
+
+  } else {
+    fadeOutAudio(document.getElementById('music'), 4000);
+  }
+}
+
+function endSlides() {
+  document.getElementById('step2').classList.add('hidden');
+  document.getElementById('step3').classList.remove('hidden');
+}
+
+function createLeaves() {
+  for (let i = 0; i < 10; i++) {
+    let leaf = document.createElement("div");
+    leaf.className = "leaf";
+    leaf.style.left = Math.random() * 100 + "vw";
+    leaf.style.animationDuration = (6 + Math.random() * 4) + "s";
+    document.body.appendChild(leaf);
+  }
+}
+</script>
+
+</body>
+</html>
